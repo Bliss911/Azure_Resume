@@ -63,8 +63,5 @@ workflows:
     jobs:
       - build-and-test
       - print_hello
-          requires:
-            - build-and-test
       - print_world
-          requires:
-            - print_hello
+          requires: print_hello
