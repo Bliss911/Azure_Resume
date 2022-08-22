@@ -62,7 +62,6 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-      - print_hello:
-          requires: build-and-test
+      - print_hello
       - print_world:
           requires: print_hello
