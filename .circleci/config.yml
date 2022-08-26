@@ -8,7 +8,7 @@ jobs:
     steps:
       - run:
           name: Run Script1
-          command: echo "Hello Guys!!!"
+          command: echo "Hello $ENV_NAME!!!"
 
   print_world:
     docker:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - run:
           name: Run Script2
-          command: echo "Now print World!!!"
+          command: echo "$ENV_NAME Now print World!!!"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
