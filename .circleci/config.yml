@@ -36,6 +36,8 @@ jobs:
           command: cat ~/output.txt
   
   output_command:
+    docker:
+      - image: cimg/python:3.10.2
     steps:
       - print_pipeline_id
 
