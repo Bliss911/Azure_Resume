@@ -1,6 +1,17 @@
 version: 2.1
 orbs:
   welcome: circleci/welcome-orb@0.4.1
+
+commands:
+  print_pipeline_id:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "${CIRCLE_WORKFLOW_ID}"
+    steps:
+      - run: echo << parameters.to >>
+
 jobs:
   save_hello_world_output:
     docker:
@@ -10,7 +21,7 @@ jobs:
           name: Run Script1
           command: echo "Hello $ENV_NAME!!!, tet to output here" > output.txt
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
             - output.txt
 
@@ -19,10 +30,16 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - attach_workspace:
-          at: .
+          at: ~/
       - run:
           name: Run Output
-          command: cat output.txt
+          command: cat ~/output.txt
+  
+  output_command:
+    steps:
+      - print_pipeline_id
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
