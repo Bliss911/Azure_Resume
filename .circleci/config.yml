@@ -19,7 +19,7 @@ jobs:
     steps:
       - run:
           name: Run Script1
-          command: echo "Hello $ENV_NAME!!!, tet to output here" > output.txt
+          command: echo "Hello $ENV_NAME!!!, text to output here" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
