@@ -10,7 +10,7 @@ jobs:
           name: Run Script1
           command: echo "Hello $ENV_NAME!!!, tet to output here" > output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: .
           paths:
             - output.txt
 
@@ -19,7 +19,7 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: .
       - run:
           name: Run Output
           command: cat output.txt
