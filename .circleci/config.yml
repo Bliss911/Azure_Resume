@@ -2,21 +2,27 @@ version: 2.1
 orbs:
   welcome: circleci/welcome-orb@0.4.1
 jobs:
-  print_hello:
+  save_hello_world_output:
     docker:
       - image: cimg/python:3.10.2
     steps:
       - run:
           name: Run Script1
-          command: echo "Hello $ENV_NAME!!!"
+          command: echo "Hello $ENV_NAME!!!, tet to output here" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - output.txt
 
-  print_world:
+  print_output_file:
     docker:
       - image: cimg/python:3.10.2
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
-          name: Run Script2
-          command: echo "$ENV_NAME Now print World!!!"
+          name: Run Output
+          command: cat output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -24,7 +30,7 @@ workflows:
   welcome: 
     jobs:
       - welcome/run
-      - print_hello
-      - print_world:
+      - save_hello_world_output
+      - print_output_file:
           requires: 
-            - print_hello
+            - save_hello_world_output
