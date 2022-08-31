@@ -17,7 +17,7 @@ jobs:
       steps:
         - checkout
         - add_ssh_keys:          
-          fingerprints: ["dd:b1:b8:34:a1:73:4b:83:e5:12:35:fa:03:5d:6a:e7"] 
+            fingerprints: ["dd:b1:b8:34:a1:73:4b:83:e5:12:35:fa:03:5d:6a:e7"] 
         - run:
             name: Install Ansible
             command: |
@@ -25,7 +25,7 @@ jobs:
         - run:
             name: Run Playbook and Configure server
             command: |
-              ansible-playbook -i inventory 
+              ansible-playbook -i inventory main-remote.yml
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
